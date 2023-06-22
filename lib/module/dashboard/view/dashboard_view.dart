@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
+import 'package:posrant/module/dashboard/widget/dashboard_banner_image.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -46,68 +47,101 @@ class DashboardView extends StatefulWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              Container(
-                height: 160.0,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80",
+              DashboardBannerImage(), // widget
+              const SizedBox(
+                height: 30,
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'All featured', // Add the desired text
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
                     ),
-                    fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      16.0,
-                    ),
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.black26,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            16.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 20.0,
-                      top: 0.0,
-                      bottom: 0.0,
-                      child: SizedBox(
-                        width: 100.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "30%",
-                              style: GoogleFonts.oswald(
-                                fontSize: 30.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "Discount Only Valid for Today",
-                              style: GoogleFonts.oswald(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
               const SizedBox(
-                height: 20.0,
+                height: 10,
+              ),
+              Builder(
+                builder: (context) {
+                  List<Map<String, dynamic>> items = [
+                    {
+                      "icon": "assets/images/fast-food.png",
+                      "label": "Product",
+                      "on_tap": () => Get.to(const ProductListView()),
+                    },
+                    {
+                      "icon": "assets/images/point-of-sale.png",
+                      "label": "POS",
+                      "on_tap": () {},
+                    },
+                    {
+                      "icon": "assets/images/cashless-payment.png",
+                      "label": "Order",
+                      "on_tap": () => Get.to(const OrderView()),
+                    },
+                  ];
+                  return Column(
+                    children: items
+                        .map(
+                          (item) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Card(
+                              elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(10),
+                                onTap: () => item["on_tap"](),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Row(
+                                    children: [
+                                      Image(
+                                        image: AssetImage(item["icon"]),
+                                        width: 32,
+                                        height: 32,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          item["label"],
+                                          style: const TextStyle(
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: const Icon(Icons.arrow_forward),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  );
+                },
               ),
             ],
           ),
