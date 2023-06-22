@@ -18,4 +18,6 @@ class DashboardController extends State<DashboardView>
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  bool isDarkThemeEnabled = false;
 }

@@ -16,7 +16,7 @@ class MainNavigationView extends StatefulWidget {
           children: const [
             DashboardView(),
             OrderView(),
-            FavoriteView(),
+            // FavoriteView(),
             ProfileView(),
           ],
         ),
@@ -42,18 +42,18 @@ class MainNavigationView extends StatefulWidget {
               ),
               label: "Order",
             ),
-            BottomNavigationBarItem(
-              icon: Badge(
-                label: Text(
-                  "4",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                child: Icon(Icons.favorite),
-              ),
-              label: "Favorite",
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Badge(
+            //     label: Text(
+            //       "4",
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //       ),
+            //     ),
+            //     child: Icon(Icons.favorite),
+            //   ),
+            //   label: "Favorite",
+            // ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,

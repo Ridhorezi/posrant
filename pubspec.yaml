@@ -47,4 +47,11 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
 flutter:
+  assets: 
+    - assets/
+    - assets/images/cashless-payment.png
+    - assets/images/fast-food.png
+    - assets/images/point-of-sale.png
+    - assets/images/banner-1.jpg
+    - assets/images/banner-2.jpeg
   uses-material-design: true
