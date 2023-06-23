@@ -1,5 +1,6 @@
 import 'package:posrant/core.dart';
 import 'package:flutter/material.dart';
+import 'package:posrant/module/auth/view/start_view.dart';
 // import 'package:posrant/debug.dart';
 
 void main() async {
@@ -22,7 +23,8 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: getDefaultTheme(),
       // home: const MainNavigationView(),
-      home: const LoginView(),
+      // home: const LoginView(),
+      home: const StartView(),
       // builder: (context, child) => debugView(
       //   context: context,
       //   child: child,

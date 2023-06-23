@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
 // ignore: unnecessary_import
 import '../controller/login_controller.dart';
+import '../utility/font_size.dart';
+import '../utility/theme_colors.dart';
+import '../widget/main_button.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -10,18 +13,34 @@ class LoginView extends StatefulWidget {
     controller.view = this;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-        actions: const [],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Let's get you in!",
+                  style: GoogleFonts.poppins(
+                    color: ThemeColors.whiteTextColor,
+                    fontSize: FontSize.xxLarge,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 7),
+                  child: Text(
+                    "Hi, Welcome to posrant The Food 🥘\n Sign in to continue ➡️",
+                    style: GoogleFonts.poppins(
+                      color: ThemeColors.greyTextColor,
+                      fontSize: FontSize.medium,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 50),
+                Form(
                   child: Column(
                     children: [
                       QTextField(
@@ -44,26 +63,37 @@ class LoginView extends StatefulWidget {
                           controller.password = value;
                         },
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 42,
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: primaryColor,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: Text(
+                            "Forgot password?",
+                            style: GoogleFonts.poppins(
+                              color: ThemeColors.greyTextColor,
+                              fontSize: FontSize.medium,
+                              fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
-                          icon: const Icon(Icons.login),
-                          label: const Text("Login"),
-                          onPressed: () => controller.doLogin(),
                         ),
+                      ),
+                      const SizedBox(height: 20),
+                      MainButton(
+                          text: 'Login', onTap: () => controller.doLogin()),
+                      const SizedBox(height: 16),
+                      MainButton(
+                        text: 'Login with Google',
+                        backgroundColor: ThemeColors.whiteTextColor,
+                        textColor: ThemeColors.scaffoldBgColor,
+                        iconPath: 'assets/images/google.png',
+                        onTap: () {},
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
