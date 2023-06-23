@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
+// ignore: unnecessary_import
 import '../controller/product_list_controller.dart';
 
 class ProductListView extends StatefulWidget {
@@ -12,6 +13,12 @@ class ProductListView extends StatefulWidget {
       appBar: AppBar(
         title: const Text("ProductList"),
         actions: const [],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () async {
+          await Get.to(const ProductFormView());
+        },
       ),
       body: SingleChildScrollView(
         child: Container(

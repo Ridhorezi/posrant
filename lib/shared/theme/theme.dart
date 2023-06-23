@@ -77,5 +77,8 @@ ThemeData getDefaultTheme() {
       filled: true,
       fillColor: Color(0xfffbfbfb),
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: primaryColor,
+    ),
   );
 }
