@@ -6,14 +6,15 @@ import 'package:posrant/shared/util/validator/validator.dart';
 import '../controller/product_form_controller.dart';
 
 class ProductFormView extends StatefulWidget {
-  const ProductFormView({Key? key}) : super(key: key);
+  final Map? item;
+  const ProductFormView({Key? key, this.item}) : super(key: key);
 
   Widget build(context, ProductFormController controller) {
     controller.view = this;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("ProductForm"),
+        title: const Text("Product Form"),
         actions: const [],
       ),
       body: SingleChildScrollView(

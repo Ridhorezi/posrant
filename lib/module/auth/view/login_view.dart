@@ -31,7 +31,7 @@ class LoginView extends StatefulWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 7),
                   child: Text(
-                    "Hi, Welcome to posrant The Food 🥘\n Sign in to continue ➡️",
+                    "Hi, Welcome to posrant The Food \nSign in to continue ➡️",
                     style: GoogleFonts.poppins(
                       color: ThemeColors.greyTextColor,
                       fontSize: FontSize.medium,
@@ -67,13 +67,16 @@ class LoginView extends StatefulWidget {
                         alignment: Alignment.centerRight,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 12),
-                          child: Text(
-                            "Forgot password?",
-                            style: GoogleFonts.poppins(
-                              color: ThemeColors.greyTextColor,
-                              fontSize: FontSize.medium,
-                              fontWeight: FontWeight.w600,
-                              decoration: TextDecoration.underline,
+                          child: InkWell(
+                            onTap: () => Get.to(const ForgotView()),
+                            child: Text(
+                              "Forgot password?",
+                              style: GoogleFonts.poppins(
+                                color: ThemeColors.greyTextColor,
+                                fontSize: FontSize.medium,
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
                         ),

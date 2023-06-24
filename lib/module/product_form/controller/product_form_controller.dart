@@ -14,6 +14,14 @@ class ProductFormController extends State<ProductFormView>
   @override
   void initState() {
     instance = this;
+    if (isEdit) {
+      id = widget.item!["id"];
+      photo = widget.item!["photo"];
+      productName = widget.item!["product_name"];
+      price = widget.item!["price"].toDouble();
+      category = widget.item!["category"];
+      description = widget.item!["description"];
+    }
     super.initState();
   }
 
@@ -22,6 +30,8 @@ class ProductFormController extends State<ProductFormView>
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  bool get isEdit => widget.item != null;
 
   String? id;
   String? photo;
@@ -55,7 +65,7 @@ class ProductFormController extends State<ProductFormView>
     Fluttertoast.showToast(
       msg: 'Product saved successfully',
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP_RIGHT,
+      gravity: ToastGravity.CENTER,
       backgroundColor: Colors.lightBlue,
       textColor: Colors.white,
     );
@@ -65,7 +75,7 @@ class ProductFormController extends State<ProductFormView>
     Fluttertoast.showToast(
       msg: 'Failed to save product',
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP_RIGHT,
+      gravity: ToastGravity.CENTER,
       backgroundColor: Colors.red,
       textColor: Colors.white,
     );
@@ -82,21 +92,41 @@ class ProductFormController extends State<ProductFormView>
     _clearErrors();
     _validateForm();
     if (_isValid()) {
-      showLoading();
-      bool success = await ProductService().create(
-        photo: photo!,
-        productName: productName!,
-        price: price!,
-        category: category!,
-        description: description!,
-      );
-      hideLoading();
-      if (success) {
-        _showSuccessMessage();
-        Get.to(const ProductListView());
+      if (isEdit) {
+        showLoading();
+        bool success = await ProductService().update(
+          id: id!,
+          photo: photo!,
+          productName: productName!,
+          price: price!,
+          category: category!,
+          description: description!,
+        );
+        hideLoading();
+        if (success) {
+          _showSuccessMessage();
+          Get.to(const ProductListView());
+        } else {
+          _showErrorMessage();
+          Get.back();
+        }
       } else {
-        _showErrorMessage();
-        Get.back();
+        showLoading();
+        bool success = await ProductService().create(
+          photo: photo!,
+          productName: productName!,
+          price: price!,
+          category: category!,
+          description: description!,
+        );
+        hideLoading();
+        if (success) {
+          _showSuccessMessage();
+          Get.to(const ProductListView());
+        } else {
+          _showErrorMessage();
+          Get.back();
+        }
       }
     } else {
       setState(() {});
