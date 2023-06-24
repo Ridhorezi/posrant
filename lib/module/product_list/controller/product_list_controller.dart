@@ -26,7 +26,7 @@ class ProductListController extends State<ProductListView>
     Fluttertoast.showToast(
       msg: 'Product deleted successfully',
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
+      gravity: ToastGravity.TOP,
       backgroundColor: Colors.lightBlue,
       textColor: Colors.white,
     );
@@ -36,7 +36,7 @@ class ProductListController extends State<ProductListView>
     Fluttertoast.showToast(
       msg: 'Failed to delete product',
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
+      gravity: ToastGravity.TOP,
       backgroundColor: Colors.red,
       textColor: Colors.white,
     );

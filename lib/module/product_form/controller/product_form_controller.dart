@@ -65,7 +65,7 @@ class ProductFormController extends State<ProductFormView>
     Fluttertoast.showToast(
       msg: 'Product saved successfully',
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
+      gravity: ToastGravity.TOP,
       backgroundColor: Colors.lightBlue,
       textColor: Colors.white,
     );
@@ -75,7 +75,7 @@ class ProductFormController extends State<ProductFormView>
     Fluttertoast.showToast(
       msg: 'Failed to save product',
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
+      gravity: ToastGravity.TOP,
       backgroundColor: Colors.red,
       textColor: Colors.white,
     );
