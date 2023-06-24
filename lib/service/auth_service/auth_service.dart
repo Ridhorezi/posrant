@@ -1,6 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  forgotPassword({required String email}) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on Exception {
+      throw Exception();
+    }
+  }
+
   login({required String email, required String password}) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -20,13 +30,7 @@ class AuthService {
     }
   }
 
-  Future<void> forgotPassword({required String email}) async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      throw Exception(e.message);
-    } catch (e) {
-      throw Exception('Failed to send reset password email');
-    }
-  }
+  // Getter isLoggedInStream
+  Stream<bool> get isLoggedInStream =>
+      _auth.authStateChanges().map((user) => user != null);
 }

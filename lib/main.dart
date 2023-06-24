@@ -22,14 +22,7 @@ class MainApp extends StatelessWidget {
       navigatorKey: Get.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: getDefaultTheme(),
-      // home: const MainNavigationView(),
-      // home: const LoginView(),
       home: const StartView(),
-      // builder: (context, child) => debugView(
-      //   context: context,
-      //   child: child,
-      //   visible: true,
-      // ),
     );
   }
 }
