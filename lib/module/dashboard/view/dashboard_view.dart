@@ -17,21 +17,7 @@ class DashboardView extends StatefulWidget {
             child: Center(
               child: Badge(
                 label: Text(
-                  "6",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                child: Icon(MdiIcons.chatQuestion),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Center(
-              child: Badge(
-                label: Text(
-                  "3",
+                  "4",
                   style: TextStyle(
                     color: Colors.white,
                   ),

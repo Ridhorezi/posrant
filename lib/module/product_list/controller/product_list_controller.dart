@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:posrant/service/product_service/product_service.dart';
+import 'package:posrant/shared/util/show_loading/show_loading.dart';
 import 'package:posrant/state_util.dart';
 import '../view/product_list_view.dart';
 
@@ -18,4 +21,43 @@ class ProductListController extends State<ProductListView>
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  void _showSuccessMessage() {
+    Fluttertoast.showToast(
+      msg: 'Product deleted successfully',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      backgroundColor: Colors.lightBlue,
+      textColor: Colors.white,
+    );
+  }
+
+  void _showErrorMessage() {
+    Fluttertoast.showToast(
+      msg: 'Failed to delete product',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+    );
+  }
+
+  doDelete(String id) async {
+    showLoading();
+    bool success = await ProductService().delete(id);
+    hideLoading();
+    if (success) {
+      _showSuccessMessage();
+      Get.to(const ProductListView());
+    } else {
+      _showErrorMessage();
+      Get.back();
+    }
+  }
+
+  String search = "";
+  updateSearch(String query) {
+    search = query;
+    setState(() {});
+  }
 }

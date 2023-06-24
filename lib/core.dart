@@ -18,6 +18,8 @@ export 'package:posrant/module/profile/controller/profile_controller.dart';
 export 'package:posrant/module/profile/view/profile_view.dart';
 export 'package:posrant/module/auth/controller/login_controller.dart';
 export 'package:posrant/module/auth/view/login_view.dart';
+export 'package:posrant/module/auth/controller/forgot_controller.dart';
+export 'package:posrant/module/auth/view/forgot_view.dart';
 export 'package:posrant/module/product_form/controller/product_form_controller.dart';
 export 'package:posrant/module/product_form/view/product_form_view.dart';
 export 'package:posrant/module/product_list/controller/product_list_controller.dart';
