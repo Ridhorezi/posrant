@@ -90,7 +90,7 @@ class LoginView extends StatefulWidget {
                         backgroundColor: ThemeColors.whiteTextColor,
                         textColor: ThemeColors.scaffoldBgColor,
                         iconPath: 'assets/images/google.png',
-                        onTap: () {},
+                        onTap: () => controller.loginWithGoogle(),
                       ),
                     ],
                   ),
