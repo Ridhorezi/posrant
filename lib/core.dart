@@ -5,6 +5,7 @@ it means you have to rename it to something more unique.
 */
 export 'package:posrant/config.dart';
 export 'package:posrant/core_package.dart';
+
 export 'package:posrant/module/dashboard/controller/dashboard_controller.dart';
 export 'package:posrant/module/dashboard/view/dashboard_view.dart';
 export 'package:posrant/module/favorite/controller/favorite_controller.dart';
@@ -13,7 +14,6 @@ export 'package:posrant/module/main_navigation/controller/main_navigation_contro
 export 'package:posrant/module/main_navigation/view/main_navigation_view.dart';
 export 'package:posrant/module/order/controller/order_controller.dart';
 export 'package:posrant/module/order/view/order_view.dart';
-
 export 'package:posrant/module/profile/controller/profile_controller.dart';
 export 'package:posrant/module/profile/view/profile_view.dart';
 export 'package:posrant/module/auth/controller/login_controller.dart';
@@ -24,8 +24,11 @@ export 'package:posrant/module/product_form/controller/product_form_controller.d
 export 'package:posrant/module/product_form/view/product_form_view.dart';
 export 'package:posrant/module/product_list/controller/product_list_controller.dart';
 export 'package:posrant/module/product_list/view/product_list_view.dart';
+export 'package:posrant/module/table_list/controller/table_list_controller.dart';
+export 'package:posrant/module/table_list/view/table_list_view.dart';
 
 export 'package:posrant/setup.dart';
+
 export 'package:posrant/shared/theme/theme.dart';
 export 'package:posrant/shared/theme/theme_config.dart';
 export 'package:posrant/shared/theme/theme_dark.dart';
@@ -43,6 +46,7 @@ export 'package:posrant/shared/util/show_snackbar/show_snackbar.dart';
 export 'package:posrant/shared/util/string_extension/string_extension.dart';
 export 'package:posrant/shared/util/url_launcher/url_launcher.dart';
 export 'package:posrant/shared/util/validator/validator.dart';
+
 export 'package:posrant/shared/widget/form/autocomplete/autocomplete.dart';
 export 'package:posrant/shared/widget/form/button/action_button.dart';
 export 'package:posrant/shared/widget/form/button/action_button_with_options.dart';
@@ -70,4 +74,5 @@ export 'package:posrant/shared/widget/form/time_picker/timepicker.dart';
 export 'package:posrant/shared/widget/list/list_view.dart';
 export 'package:posrant/shared/widget/typography/heading.dart';
 export 'package:posrant/shared/widget/widget_demo/widget_demo.dart';
+
 export 'package:posrant/state_util.dart';

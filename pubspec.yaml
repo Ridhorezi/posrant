@@ -57,4 +57,5 @@ flutter:
     - assets/images/banner-1.jpg
     - assets/images/banner-2.jpeg
     - assets/images/google.png
+    - assets/images/table.png
   uses-material-design: true

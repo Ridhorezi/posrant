@@ -1,3 +1,6 @@
+import 'package:posrant/service/product_service/product_service.dart';
+import 'package:posrant/service/table_service/table_service.dart';
+
 class DummyService {
   List<Map<String, dynamic>> productList = [
     {
@@ -91,5 +94,25 @@ class DummyService {
     }
   ];
 
-  generate() async {}
+  generate() async {
+    for (var item in productList) {
+      await ProductService().create(
+        photo: item["photo"],
+        productName: item["product_name"],
+        price: item["price"],
+        category: item["category"],
+        description: item["description"],
+      );
+    }
+  }
+
+  generateTables() async {
+    await TableService().deleteAll();
+    for (var i = 1; i <= 32; i++) {
+      await TableService().create(
+        orderIndex: i,
+        tableNumber: "$i",
+      );
+    }
+  }
 }

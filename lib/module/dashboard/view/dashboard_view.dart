@@ -62,6 +62,11 @@ class DashboardView extends StatefulWidget {
                       "on_tap": () => Get.to(const ProductListView()),
                     },
                     {
+                      "icon": "assets/images/table.png",
+                      "label": "Table",
+                      "on_tap": () => Get.to(const TableListView()),
+                    },
+                    {
                       "icon": "assets/images/point-of-sale.png",
                       "label": "POS",
                       "on_tap": () {},
@@ -86,7 +91,7 @@ class DashboardView extends StatefulWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 onTap: () => item["on_tap"](),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(20),
+                                  padding: const EdgeInsets.all(15),
                                   child: Row(
                                     children: [
                                       Image(
