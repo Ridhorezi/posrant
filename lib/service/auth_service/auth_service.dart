@@ -4,22 +4,27 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  forgotPassword({required String email}) async {
+  Future<void> forgotPassword({
+    required String email,
+  }) async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    } on Exception {
-      throw Exception();
+      await _auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 
-  login({required String email, required String password}) async {
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } on Exception {
-      throw Exception();
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -39,16 +44,16 @@ class AuthService {
 
         await _auth.signInWithCredential(credential);
       }
-    } on FirebaseAuthException catch (e) {
-      throw Exception(e.code);
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 
-  logout() async {
+  Future<void> logout() async {
     try {
-      await FirebaseAuth.instance.signOut();
-    } on Exception {
-      throw Exception();
+      await _auth.signOut();
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 

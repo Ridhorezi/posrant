@@ -69,7 +69,7 @@ class DashboardView extends StatefulWidget {
                     {
                       "icon": "assets/images/point-of-sale.png",
                       "label": "POS",
-                      "on_tap": () {},
+                      "on_tap": () => Get.to(const PosTableView()),
                     },
                     {
                       "icon": "assets/images/cashless-payment.png",

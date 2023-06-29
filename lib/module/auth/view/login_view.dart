@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
-// ignore: unnecessary_import
-import '../controller/login_controller.dart';
 import '../utility/font_size.dart';
 import '../utility/theme_colors.dart';
 import '../widget/main_button.dart';
@@ -83,7 +81,12 @@ class LoginView extends StatefulWidget {
                       ),
                       const SizedBox(height: 20),
                       MainButton(
-                          text: 'Login', onTap: () => controller.doLogin()),
+                        text: 'Login',
+                        onTap: () => controller.login(
+                          email: controller.email,
+                          password: controller.password,
+                        ),
+                      ),
                       const SizedBox(height: 16),
                       MainButton(
                         text: 'Login with Google',

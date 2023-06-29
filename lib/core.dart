@@ -26,6 +26,10 @@ export 'package:posrant/module/product_list/controller/product_list_controller.d
 export 'package:posrant/module/product_list/view/product_list_view.dart';
 export 'package:posrant/module/table_list/controller/table_list_controller.dart';
 export 'package:posrant/module/table_list/view/table_list_view.dart';
+export 'package:posrant/module/pos_table/controller/pos_table_controller.dart';
+export 'package:posrant/module/pos_table/view/pos_table_view.dart';
+export 'package:posrant/module/pos_order/controller/pos_order_controller.dart';
+export 'package:posrant/module/pos_order/view/pos_order_view.dart';
 
 export 'package:posrant/setup.dart';
 

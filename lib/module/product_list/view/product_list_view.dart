@@ -136,7 +136,7 @@ class ProductListView extends StatefulWidget {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                    item["photo"],
+                                    item["photo"] ?? "",
                                   ),
                                   fit: BoxFit.cover,
                                 ),
@@ -145,8 +145,8 @@ class ProductListView extends StatefulWidget {
                                 ),
                               ),
                             ),
-                            title: Text(item["product_name"]),
-                            subtitle: Text("${item["price"]}"),
+                            title: Text(item["product_name"] ?? ""),
+                            subtitle: Text("${item["price"] ?? ""}"),
                           ),
                         ),
                       );
