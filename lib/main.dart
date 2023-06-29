@@ -1,6 +1,7 @@
 import 'package:posrant/core.dart';
 import 'package:flutter/material.dart';
 import 'package:posrant/module/auth/view/start_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:posrant/debug.dart';
 
 void main() async {
@@ -17,12 +18,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'posrant',
-      navigatorKey: Get.navigatorKey,
-      debugShowCheckedModeBanner: false,
-      theme: getDefaultTheme(),
-      home: const StartView(),
+    return ValueListenableBuilder(
+      valueListenable: Get.mainTheme,
+      builder: (context, value, child) {
+        return MaterialApp(
+          title: 'posrant',
+          navigatorKey: Get.navigatorKey,
+          debugShowCheckedModeBanner: false,
+          theme: getDefaultTheme(),
+          home: FirebaseAuth.instance.currentUser != null
+              ? const MainNavigationView()
+              : const StartView(),
+        );
+      },
     );
   }
 }
