@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
 import 'package:posrant/service/dummy_service/dummy_service.dart';
@@ -36,6 +37,10 @@ class TableListView extends StatefulWidget {
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("tables")
+                    .where(
+                      "owner_id",
+                      isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+                    )
                     .orderBy("order_index")
                     .snapshots(),
                 builder: (context, snapshot) {

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProductService {
   final _firestore = FirebaseFirestore.instance;
@@ -13,6 +14,7 @@ class ProductService {
   }) async {
     try {
       await _firestore.collection("products").add({
+        "owner_id": FirebaseAuth.instance.currentUser!.uid,
         "photo": photo,
         "product_name": productName,
         "price": price,
@@ -36,6 +38,7 @@ class ProductService {
   }) async {
     try {
       await _firestore.collection("products").doc(id).update({
+        "owner_id": FirebaseAuth.instance.currentUser!.uid,
         "photo": photo,
         "product_name": productName,
         "price": price,

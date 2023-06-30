@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:posrant/service/auth_service/auth_service.dart';
-import 'package:posrant/shared/util/dialog/show_info_dialog.dart';
 import 'package:posrant/shared/util/show_loading/show_loading.dart';
 import 'package:posrant/state_util.dart';
 import '../view/forgot_view.dart';
@@ -34,9 +34,9 @@ class ForgotController extends State<ForgotView> implements MvcController {
     );
   }
 
-  void _showErrorMessage() {
+  void _showErrorMessage(String errorMessage) {
     Fluttertoast.showToast(
-      msg: 'Ups! something when wrong!',
+      msg: errorMessage,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       backgroundColor: Colors.red,
@@ -44,21 +44,42 @@ class ForgotController extends State<ForgotView> implements MvcController {
     );
   }
 
-  String email = "19210471@bsi.ac.id";
+  String email = '';
 
-  doForgotPassword() async {
+  Future<void> doForgotPassword({required String email}) async {
+    if (email.isEmpty) {
+      String errorMessage = 'Email cannot be empty';
+      _showErrorMessage(errorMessage);
+      return;
+    }
+
     showLoading();
     try {
-      await AuthService().forgotPassword(
-        email: email,
-      );
+      await AuthService().forgotPassword(email: email);
       hideLoading();
       Get.back();
       _showSuccessMessage();
-    } on Exception {
+    } catch (e) {
       hideLoading();
-      _showErrorMessage();
-      showInfoDialog("Ups! something when wrong !");
+      String errorMessage = 'Failed: ';
+
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case 'invalid-email':
+            errorMessage += 'Invalid email address';
+            break;
+          case 'user-not-found':
+            errorMessage += 'User not found';
+            break;
+          default:
+            errorMessage += e.toString();
+            break;
+        }
+      } else {
+        errorMessage += e.toString();
+      }
+
+      _showErrorMessage(errorMessage);
     }
   }
 }

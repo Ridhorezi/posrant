@@ -51,9 +51,9 @@ class ForgotView extends StatefulWidget {
                       ),
                       MainButton(
                         text: 'Forgot Password',
-                        onTap: () {
-                          controller.doForgotPassword();
-                        },
+                        onTap: () => controller.doForgotPassword(
+                          email: controller.email,
+                        ),
                       ),
                       const SizedBox(height: 16),
                     ],
