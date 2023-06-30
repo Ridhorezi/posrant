@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison, invalid_use_of_protected_member
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
 import 'package:posrant/shared/widget/item_dismissible/item_dismissible.dart';
@@ -93,6 +94,10 @@ class ProductListView extends StatefulWidget {
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("products")
+                    .where(
+                      "owner_id",
+                      isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+                    )
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) return const Text("Error");

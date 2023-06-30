@@ -1,5 +1,4 @@
-// ignore_for_file: unnecessary_import
-
+// login_controller.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +6,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:posrant/core.dart';
 import 'package:posrant/service/auth_service/auth_service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:posrant/state_util.dart';
-import '../../../shared/util/show_loading/show_loading.dart';
-import '../view/login_view.dart';
 
 class LoginController extends State<LoginView> implements MvcController {
   static late LoginController instance;
@@ -47,8 +43,8 @@ class LoginController extends State<LoginView> implements MvcController {
     );
   }
 
-  String email = "ridhorezi1212@gmail.com";
-  String password = "password";
+  String email = "";
+  String password = "";
 
   Future<String?> getUserEmail() async {
     GoogleSignIn googleSignIn = GoogleSignIn();
@@ -84,6 +80,12 @@ class LoginController extends State<LoginView> implements MvcController {
   }
 
   Future<void> login({required String email, required String password}) async {
+    if (email.isEmpty || password.isEmpty) {
+      String errorMessage = 'Email and password cannot be empty';
+      _showErrorMessage(errorMessage);
+      return;
+    }
+
     showLoading();
     try {
       UserCredential credential = await FirebaseAuth.instance
@@ -104,7 +106,30 @@ class LoginController extends State<LoginView> implements MvcController {
       }
     } catch (e) {
       hideLoading();
-      String errorMessage = 'Failed to login: ${e.toString()}';
+      String errorMessage = 'Failed to login: ';
+
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case 'wrong-password':
+            errorMessage += 'Invalid password';
+            break;
+          case 'invalid-email':
+            errorMessage += 'Invalid email address';
+            break;
+          case 'user-disabled':
+            errorMessage += 'User account is disabled';
+            break;
+          case 'user-not-found':
+            errorMessage += 'User not found';
+            break;
+          default:
+            errorMessage += e.toString();
+            break;
+        }
+      } else {
+        errorMessage += e.toString();
+      }
+
       _showErrorMessage(errorMessage);
     }
   }

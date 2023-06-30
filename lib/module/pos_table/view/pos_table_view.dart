@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
 // ignore: unnecessary_import
@@ -17,12 +18,16 @@ class PosTableView extends StatefulWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("tables")
+                    .where(
+                      "owner_id",
+                      isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+                    )
                     .orderBy("order_index")
                     .snapshots(),
                 builder: (context, snapshot) {
