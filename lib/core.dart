@@ -8,8 +8,6 @@ export 'package:posrant/core_package.dart';
 
 export 'package:posrant/module/dashboard/controller/dashboard_controller.dart';
 export 'package:posrant/module/dashboard/view/dashboard_view.dart';
-export 'package:posrant/module/favorite/controller/favorite_controller.dart';
-export 'package:posrant/module/favorite/view/favorite_view.dart';
 export 'package:posrant/module/main_navigation/controller/main_navigation_controller.dart';
 export 'package:posrant/module/main_navigation/view/main_navigation_view.dart';
 export 'package:posrant/module/order/controller/order_controller.dart';
