@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
-import 'package:posrant/service/dummy_service/dummy_service.dart';
+// import 'package:posrant/service/dummy_service/dummy_service.dart';
 // ignore: unnecessary_import
 import '../controller/table_list_controller.dart';
 
@@ -15,18 +15,18 @@ class TableListView extends StatefulWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Table List"),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              showLoading();
-              await DummyService().generateTables();
-              hideLoading();
-            },
-            icon: const Icon(
-              Icons.refresh,
-              size: 24,
-            ),
-          ),
+        actions: const [
+          // IconButton(
+          //   onPressed: () async {
+          //     showLoading();
+          //     await DummyService().generateTables();
+          //     hideLoading();
+          //   },
+          //   icon: const Icon(
+          //     Icons.refresh,
+          //     size: 24,
+          //   ),
+          // ),
         ],
       ),
       body: SingleChildScrollView(
