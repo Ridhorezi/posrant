@@ -64,7 +64,8 @@ class ProductFormView extends StatefulWidget {
                         validator: Validator.required,
                         // ignore: prefer_null_aware_operators
                         value: controller.price != null
-                            ? controller.price.toString()
+                            ? NumberFormat.decimalPattern()
+                                .format(controller.price)
                             : null,
                         onChanged: (value) {
                           controller.price = double.tryParse(value);
@@ -84,20 +85,72 @@ class ProductFormView extends StatefulWidget {
                         value: controller.category,
                         items: const [
                           {
-                            "label": "Drink",
-                            "value": "Drink",
+                            "label": "Tea",
+                            "value": "Tea",
                           },
                           {
-                            "label": "Main Course",
-                            "value": "Main Course",
+                            "label": "Cocktails",
+                            "value": "Cocktails",
                           },
                           {
-                            "label": "Salad",
-                            "value": "Salad",
+                            "label": "Beer",
+                            "value": "Beer",
                           },
                           {
-                            "label": "Snack",
-                            "value": "Snack",
+                            "label": "Mineral Water",
+                            "value": "Mineral Water",
+                          },
+                          {
+                            "label": "Juices",
+                            "value": "Juices",
+                          },
+                          {
+                            "label": "Coffee",
+                            "value": "Coffee",
+                          },
+                          {
+                            "label": "Beverages",
+                            "value": "Beverages",
+                          },
+                          {
+                            "label": "Pasta",
+                            "value": "Pasta",
+                          },
+                          {
+                            "label": "Rice/Noodles",
+                            "value": "Rice/Noodles",
+                          },
+                          {
+                            "label": "Appetizers",
+                            "value": "Appetizers",
+                          },
+                          {
+                            "label": "Soups",
+                            "value": "Soups",
+                          },
+                          {
+                            "label": "Salads",
+                            "value": "Salads",
+                          },
+                          {
+                            "label": "Main Courses",
+                            "value": "Main Courses",
+                          },
+                          {
+                            "label": "Seafood",
+                            "value": "Seafood",
+                          },
+                          {
+                            "label": "Sides/Snacks",
+                            "value": "Sides/Snacks",
+                          },
+                          {
+                            "label": "Beef",
+                            "value": "Beef",
+                          },
+                          {
+                            "label": "Desserts",
+                            "value": "Desserts",
                           },
                         ],
                         onChanged: (value, label) {

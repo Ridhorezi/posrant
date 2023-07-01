@@ -99,7 +99,7 @@ class LoginController extends State<LoginView> implements MvcController {
         // Panggil fungsi updateUID untuk memperbarui UID pengguna di Firestore
         await updateUID(user, newUID);
 
-        Get.offAll(const MainNavigationView());
+        Get.offAll(MainNavigationView());
         hideLoading();
         String successMessage = 'Successfully login';
         _showSuccessMessage(successMessage);
@@ -158,7 +158,7 @@ class LoginController extends State<LoginView> implements MvcController {
           // Panggil fungsi updateUID untuk memperbarui UID pengguna di Firestore
           await updateUID(user, newUID);
 
-          Get.offAll(const MainNavigationView());
+          Get.offAll(MainNavigationView());
           hideLoading();
           _showSuccessMessage('Successfully login');
         } else {

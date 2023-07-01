@@ -151,7 +151,9 @@ class ProductListView extends StatefulWidget {
                               ),
                             ),
                             title: Text(item["product_name"] ?? ""),
-                            subtitle: Text("${item["price"] ?? ""}"),
+                            subtitle: Text(
+                              "Rp ${NumberFormat.decimalPattern().format(item["price"])}",
+                            ),
                           ),
                         ),
                       );

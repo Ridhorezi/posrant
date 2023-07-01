@@ -124,7 +124,8 @@ class PosOrderView extends StatefulWidget {
                             ),
                           ),
                           title: Text(item["product_name"]),
-                          subtitle: Text("${item["price"]}"),
+                          subtitle: Text(
+                              "Rp ${NumberFormat.decimalPattern().format(item["price"])}"),
                           trailing: SizedBox(
                             width: 120,
                             child: Row(
@@ -206,7 +207,7 @@ class PosOrderView extends StatefulWidget {
                     ),
                   ),
                   Text(
-                    "${controller.total}",
+                    "Rp ${NumberFormat.decimalPattern().format(controller.total)}",
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,

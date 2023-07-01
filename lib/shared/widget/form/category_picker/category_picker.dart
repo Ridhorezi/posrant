@@ -52,6 +52,16 @@ class _QCategoryPickerState extends State<QCategoryPicker> {
     widget.onChanged(index, label, value, item);
   }
 
+  // @override
+  // void initState() {
+  //   if (widget.value != null) {
+  //     var index =
+  //         widget.items.indexWhere((item) => item["value"] == widget.value);
+  //     selectedIndex = index;
+  //   }
+  //   super.initState();
+  // }
+
   getLabel() {
     if (widget.label == null) return Container();
     return Column(

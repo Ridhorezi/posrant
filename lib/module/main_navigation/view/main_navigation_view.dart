@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
+import 'package:posrant/service/order_service/order_service.dart';
 
 class MainNavigationView extends StatefulWidget {
-  const MainNavigationView({Key? key}) : super(key: key);
+  MainNavigationView({Key? key}) : super(key: key);
+
+  final OrderService orderService =
+      OrderService(); // Tambahkan properti orderService
 
   Widget build(context, MainNavigationController controller) {
     controller.view = this;
@@ -16,15 +20,14 @@ class MainNavigationView extends StatefulWidget {
           children: const [
             DashboardView(),
             OrderView(),
-            // FavoriteView(),
             ProfileView(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: controller.selectedIndex,
           onTap: (newIndex) => controller.updateIndex(newIndex),
-          items: const [
-            BottomNavigationBarItem(
+          items: [
+            const BottomNavigationBarItem(
               icon: Icon(
                 MdiIcons.viewDashboard,
               ),
@@ -32,29 +35,31 @@ class MainNavigationView extends StatefulWidget {
             ),
             BottomNavigationBarItem(
               icon: Badge(
-                label: Text(
-                  "4",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                label: StreamBuilder<int>(
+                  stream: controller.getOrderCountStreamByStatus("Pending"),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(
+                        snapshot.data.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      );
+                    } else {
+                      return const Text(
+                        '0',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      );
+                    }
+                  },
                 ),
-                child: Icon(MdiIcons.table),
+                child: const Icon(MdiIcons.table),
               ),
               label: "Order",
             ),
-            // BottomNavigationBarItem(
-            //   icon: Badge(
-            //     label: Text(
-            //       "4",
-            //       style: TextStyle(
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     child: Icon(Icons.favorite),
-            //   ),
-            //   label: "Favorite",
-            // ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
               ),

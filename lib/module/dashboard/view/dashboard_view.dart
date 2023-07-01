@@ -14,17 +14,7 @@ class DashboardView extends StatefulWidget {
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Center(
-              child: Badge(
-                label: Text(
-                  "4",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                child: Icon(Icons.notifications),
-              ),
-            ),
+            child: Center(),
           ),
         ],
       ),

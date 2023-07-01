@@ -24,4 +24,9 @@ class MainNavigationController extends State<MainNavigationView>
     selectedIndex = newIndex;
     setState(() {});
   }
+
+  // Tambahkan metode untuk mendapatkan jumlah pesanan dengan status "Paid"
+  Stream<int> getOrderCountStreamByStatus(String status) {
+    return view.orderService.getOrderCountStreamByStatus(status);
+  }
 }
