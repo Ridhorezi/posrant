@@ -1,4 +1,4 @@
-# posrant
+# posrant (Restaurant Management System)
 
 A new Flutter project
 
