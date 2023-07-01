@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: getDefaultTheme(),
           home: FirebaseAuth.instance.currentUser != null
-              ? const MainNavigationView()
+              ? MainNavigationView()
               : const StartView(),
         );
       },

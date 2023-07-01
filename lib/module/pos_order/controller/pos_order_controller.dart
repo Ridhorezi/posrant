@@ -34,7 +34,7 @@ class PosOrderController extends State<PosOrderView> implements MvcController {
 
   void _showErrorMessage() {
     Fluttertoast.showToast(
-      msg: 'Order Successfully created',
+      msg: 'Ups! something when wrong !',
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       backgroundColor: Colors.red,
@@ -117,7 +117,7 @@ class PosOrderController extends State<PosOrderView> implements MvcController {
     // ignore: unnecessary_null_comparison
     if (success != null && success) {
       _showSuccessMessage();
-      Get.offAll(const MainNavigationView());
+      Get.offAll(MainNavigationView());
     } else {
       _showErrorMessage();
       Get.back();
