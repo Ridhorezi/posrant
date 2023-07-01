@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:posrant/core.dart';
 import 'package:posrant/service/order_service/order_service.dart';
-// import 'package:posrant/shared/util/show_loading/show_loading.dart';
-// import 'package:posrant/state_util.dart';
-// import '../view/pos_order_view.dart';
 
 class PosOrderController extends State<PosOrderView> implements MvcController {
   static late PosOrderController instance;
@@ -32,9 +29,9 @@ class PosOrderController extends State<PosOrderView> implements MvcController {
     );
   }
 
-  void _showErrorMessage() {
+  void _showErrorMessage(String errorMessage) {
     Fluttertoast.showToast(
-      msg: 'Ups! something when wrong !',
+      msg: errorMessage,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       backgroundColor: Colors.red,
@@ -104,6 +101,13 @@ class PosOrderController extends State<PosOrderView> implements MvcController {
   }
 
   checkout() async {
+    if (productList.isEmpty) {
+      // Menampilkan pesan validasi jika tidak ada item yang di-checkout
+      String errorMessage = "Tidak ada item yang di checkout";
+      _showErrorMessage(errorMessage);
+      return;
+    }
+
     showLoading();
     bool success = await OrderService().create(
       tableNumber: widget.tableNumber,
@@ -116,11 +120,14 @@ class PosOrderController extends State<PosOrderView> implements MvcController {
 
     // ignore: unnecessary_null_comparison
     if (success != null && success) {
-      _showSuccessMessage();
+      showLoading();
       Get.offAll(MainNavigationView());
+      hideLoading();
+      _showSuccessMessage();
     } else {
-      _showErrorMessage();
+      String errorMessage = 'Failed to create orders';
       Get.back();
+      _showErrorMessage(errorMessage);
     }
   }
 }

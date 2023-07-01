@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
 // ignore: unnecessary_import
@@ -88,13 +89,17 @@ class PosOrderView extends StatefulWidget {
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("products")
+                    .where(
+                      "owner_id",
+                      isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+                    )
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) return const Text("Error");
                   // ignore: unnecessary_null_comparison
                   if (snapshot.hasData == null) return Container();
                   if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-                    return const Text("No data");
+                    return const Text("No data!");
                   }
                   final data = snapshot.data!;
                   return ListView.builder(

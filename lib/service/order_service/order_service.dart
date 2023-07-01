@@ -81,6 +81,10 @@ class OrderService {
     return FirebaseFirestore.instance
         .collection("orders")
         .where("status", isEqualTo: status)
+        .where(
+          "owner_id",
+          isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+        )
         .snapshots()
         .map((snapshot) => snapshot.docs.length);
   }

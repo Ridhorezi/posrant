@@ -52,7 +52,7 @@ class OrderView extends StatefulWidget {
                     if (snapshot.hasError) return const Text("Error");
                     if (!snapshot.hasData) return Container();
                     if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-                      return const Text("No data");
+                      return const Text("No data!");
                     }
                     final data = snapshot.data!;
                     return ListView.builder(

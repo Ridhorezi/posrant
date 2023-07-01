@@ -61,9 +61,19 @@ class ProductFormController extends State<ProductFormView>
     descriptionError = null;
   }
 
-  void _showSuccessMessage() {
+  void _showSuccessAdd() {
     Fluttertoast.showToast(
-      msg: 'Product saved successfully',
+      msg: 'Product created successfully',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      backgroundColor: Colors.lightBlue,
+      textColor: Colors.white,
+    );
+  }
+
+  void _showSuccessUpdate() {
+    Fluttertoast.showToast(
+      msg: 'Product update successfully',
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       backgroundColor: Colors.lightBlue,
@@ -104,7 +114,7 @@ class ProductFormController extends State<ProductFormView>
         );
         hideLoading();
         if (success) {
-          _showSuccessMessage();
+          _showSuccessUpdate();
           Get.to(const ProductListView());
         } else {
           _showErrorMessage();
@@ -121,7 +131,7 @@ class ProductFormController extends State<ProductFormView>
         );
         hideLoading();
         if (success) {
-          _showSuccessMessage();
+          _showSuccessAdd();
           Get.to(const ProductListView());
         } else {
           _showErrorMessage();

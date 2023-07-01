@@ -69,7 +69,7 @@ class PosTableView extends StatefulWidget {
                             showInfoDialog("Not available");
                             return;
                           }
-                          Get.offAll(PosOrderView(
+                          Get.to(PosOrderView(
                             tableNumber: item["table_number"],
                           ));
                         },
