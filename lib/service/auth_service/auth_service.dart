@@ -28,6 +28,13 @@ class AuthService {
     }
   }
 
+  Future<void> sendVerificationEmail() async {
+    User? user = _auth.currentUser;
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+  }
+
   Future<void> loginWithGoogle() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();

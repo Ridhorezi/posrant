@@ -43,6 +43,41 @@ class LoginController extends State<LoginView> implements MvcController {
     );
   }
 
+  void _showEmailVerificationDialog(String email) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Verifikasi Email Diperlukan !'),
+          titlePadding: const EdgeInsets.fromLTRB(20, 10, 10, 0),
+          content: Text(
+              'Alamat email Anda belum terverifikasi. Apakah Anda ingin mengirimkan tautan verifikasi ke $email'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Batal'),
+            ),
+            TextButton(
+              onPressed: () async {
+                try {
+                  await AuthService().sendVerificationEmail();
+                  Navigator.of(context).pop();
+                  _showSuccessMessage(
+                      'Tautan verifikasi telah dikirim, Silakan periksa email Anda.');
+                } catch (e) {
+                  _showErrorMessage('Gagal mengirim tautan verifikasi!');
+                }
+              },
+              child: const Text('Kirim Tautan'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   String email = "";
   String password = "";
 
@@ -93,16 +128,22 @@ class LoginController extends State<LoginView> implements MvcController {
       User? user = credential.user;
 
       if (user != null) {
-        // Perbarui UID pengguna dengan UID baru dari Firebase
-        String newUID = user.uid;
+        if (user.emailVerified) {
+          // Perbarui UID pengguna dengan UID baru dari Firebase
+          String newUID = user.uid;
 
-        // Panggil fungsi updateUID untuk memperbarui UID pengguna di Firestore
-        await updateUID(user, newUID);
+          // Panggil fungsi updateUID untuk memperbarui UID pengguna di Firestore
+          await updateUID(user, newUID);
 
-        Get.offAll(MainNavigationView());
-        hideLoading();
-        String successMessage = 'Successfully login';
-        _showSuccessMessage(successMessage);
+          Get.offAll(MainNavigationView());
+          hideLoading();
+          String successMessage = 'Successfully login';
+          _showSuccessMessage(successMessage);
+        } else {
+          // Email pengguna belum diverifikasi, tampilkan dialog verifikasi
+          hideLoading();
+          _showEmailVerificationDialog(user.email ?? "");
+        }
       }
     } catch (e) {
       hideLoading();
@@ -169,37 +210,7 @@ class LoginController extends State<LoginView> implements MvcController {
         hideLoading();
 
         // Tampilkan dialog atau opsi pemilihan akun ulang
-        // ignore: use_build_context_synchronously
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Account Selection'),
-              content: const Text(
-                  'Your account is not registered. Do you want to select another account?'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    // Kembali ke halaman sebelumnya
-                    Get.back();
-                  },
-                  child: const Text('Cancel'),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    // Pilih akun Google baru
-                    GoogleSignIn googleSignIn = GoogleSignIn();
-                    await googleSignIn.signOut();
-                    await googleSignIn.signIn();
-                  },
-                  child: const Text('Select Account'),
-                ),
-              ],
-            );
-          },
-        );
+        showAccountSelectionDialog();
       }
     } catch (e) {
       hideLoading();
@@ -207,5 +218,38 @@ class LoginController extends State<LoginView> implements MvcController {
       _showErrorMessage(successMessage);
       Get.back();
     }
+  }
+
+  void showAccountSelectionDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Account Selection'),
+          content: const Text(
+              'Your account is not registered. Do you want to select another account?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Kembali ke halaman sebelumnya
+                Get.back();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                // Pilih akun Google baru
+                GoogleSignIn googleSignIn = GoogleSignIn();
+                await googleSignIn.signOut();
+                await googleSignIn.signIn();
+              },
+              child: const Text('Select Account'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

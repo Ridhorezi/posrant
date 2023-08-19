@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:posrant/core.dart';
-// import 'package:posrant/service/dummy_service/dummy_service.dart';
+import 'package:posrant/service/dummy_service/dummy_service.dart';
 // ignore: unnecessary_import
 import '../controller/table_list_controller.dart';
 
 class TableListView extends StatefulWidget {
   const TableListView({Key? key}) : super(key: key);
+
+  final int initialNumberOfTables = 32; // Inisialisasi jumlah table
 
   Widget build(context, TableListController controller) {
     controller.view = this;
@@ -15,18 +17,57 @@ class TableListView extends StatefulWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Table List"),
-        actions: const [
-          // IconButton(
-          //   onPressed: () async {
-          //     showLoading();
-          //     await DummyService().generateTables();
-          //     hideLoading();
-          //   },
-          //   icon: const Icon(
-          //     Icons.refresh,
-          //     size: 24,
-          //   ),
-          // ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await showDialog(
+                context: context,
+                builder: (context) {
+                  int newNumberOfTables =
+                      initialNumberOfTables; // Menggunakan properti langsung
+
+                  return AlertDialog(
+                    // title: const Text("Generate Tables"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // const Text("Enter the number of tables:"),
+                        QNumberField(
+                          label: "Enter the number of tables ",
+                          onChanged: (value) {
+                            newNumberOfTables =
+                                int.tryParse(value) ?? initialNumberOfTables;
+                          },
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          showLoading();
+                          await DummyService()
+                              .generateTables(newNumberOfTables);
+                          hideLoading();
+                        },
+                        child: const Text("Generate"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.refresh,
+              size: 24,
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(

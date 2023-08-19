@@ -106,9 +106,19 @@ class DummyService {
     }
   }
 
-  generateTables() async {
+  // generateTables() async {
+  //   await TableService().deleteAll();
+  //   for (var i = 1; i <= 32; i++) {
+  //     await TableService().create(
+  //       orderIndex: i,
+  //       tableNumber: "$i",
+  //     );
+  //   }
+  // }
+
+  generateTables(int numberOfTables) async {
     await TableService().deleteAll();
-    for (var i = 1; i <= 32; i++) {
+    for (var i = 1; i <= numberOfTables; i++) {
       await TableService().create(
         orderIndex: i,
         tableNumber: "$i",

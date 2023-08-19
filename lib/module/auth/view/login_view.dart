@@ -95,6 +95,8 @@ class LoginView extends StatefulWidget {
                         iconPath: 'assets/images/google.png',
                         onTap: () => controller.loginWithGoogle(),
                       ),
+                      const Text("Email Demo : posrantdemo@gmail.com"),
+                      const Text("Password Demo : password")
                     ],
                   ),
                 ),
